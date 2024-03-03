@@ -25,6 +25,7 @@ services:
       target: debug
     volumes:
       - "./src:/var/www/html:rw"
+      - "./xdebug:/tmp/xdebug:rw"
       - "./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini"
       - "./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
     working_dir: "/var/www/html"
