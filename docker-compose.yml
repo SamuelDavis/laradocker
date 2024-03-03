@@ -16,6 +16,7 @@ services:
     user: "${UID}:${GID}"
     depends_on:
       - database
+      - mail
     build:
       context: .
       dockerfile: php/Dockerfile
@@ -23,6 +24,7 @@ services:
     volumes:
       - "./src:/var/www/html:rw"
       - "./opcache.ini:/usr/local/etc/php/conf.d/opcache.ini"
+    working_dir: "/var/www/html"
   database:
     image: mariadb:10.5
     ports:
@@ -34,6 +36,18 @@ services:
       MYSQL_ROOT_PASSWORD: secret
     volumes:
       - database:/var/lib/mysql
+  mail:
+    image: axllent/mailpit:v1.14
+    volumes:
+      - ./mail:/data
+    ports:
+      - 1025:1025
+      - 8025:8025
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATA_FILE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
   composer:
     <<: *app
     build:
@@ -51,12 +65,8 @@ services:
     entrypoint: ["npm"]
   artisan:
     <<: *app
-    volumes:
-      - "./src:/mnt"
-    working_dir: "/mnt"
     entrypoint: ["php", "./artisan"]
-    depends_on:
-      - database
 
 volumes:
   database:
+  mail:
