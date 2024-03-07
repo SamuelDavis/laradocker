@@ -59,11 +59,13 @@ services:
       dockerfile: php/Dockerfile
       target: dependencies
     volumes:
+      - "./.composer:/.composer:rw"
       - "./src:/mnt"
     working_dir: "/mnt"
   npm:
     image: node:current-alpine
     volumes:
+      - "./.npm/:/root/.npm:rw"
       - "./src:/mnt"
     working_dir: "/mnt"
     entrypoint: ["npm"]
