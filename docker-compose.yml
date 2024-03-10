@@ -52,6 +52,12 @@ services:
       MP_DATA_FILE: /data/mailpit.db
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+  webgrind:
+    image: jokkedk/webgrind:latest
+    volumes:
+      - ./xdebug:/tmp
+    ports:
+      - 8081:80
   composer:
     <<: *app
     build:
