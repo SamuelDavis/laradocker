@@ -26,7 +26,7 @@ This consists of the following services...
 
 # Setting up HTTPS Certificates
 
-For local development, probably the easiest way to simulate HTTPS is using [mkcert](https://mkcert.dev/),"a simple tool for making locally-trusted development certificates. It requires no configuration."
+For local development, probably the easiest way to simulate HTTPS is using [mkcert](https://mkcert.dev/), "a simple tool for making locally-trusted development certificates. It requires no configuration."
 
 Don't forget to run `mkcert -i` to register mkcert's Certificate Authority so your machine considers the certificates valid. Then, to actually generate the certificates, simply execute...
 
