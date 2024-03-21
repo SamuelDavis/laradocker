@@ -24,6 +24,10 @@ This consists of the following services...
 - [artisan](https://laravel.com/docs/master/artisan)
   - "Artisan is the command line interface included with [Laravel](https://laravel.com/)."
 
+# User Permissions in Containers
+
+It's important to have `USER_ID` and `GROUP_ID` environment variables declared which will enable `docker-compose` to share file permissions between the local system and the containers.
+
 # Setting up HTTPS Certificates
 
 For local development, probably the easiest way to simulate HTTPS is using [mkcert](https://mkcert.dev/), "a simple tool for making locally-trusted development certificates. It requires no configuration."
