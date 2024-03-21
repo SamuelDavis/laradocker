@@ -28,6 +28,11 @@ This consists of the following services...
 
 It's important to have `USER_ID` and `GROUP_ID` environment variables declared which will enable `docker-compose` to share file permissions between the local system and the containers.
 
+```shell
+export USER_ID=$(id --user)
+export GROUP_ID=$(id --group)
+```
+
 # Setting up HTTPS Certificates
 
 For local development, probably the easiest way to simulate HTTPS is using [mkcert](https://mkcert.dev/), "a simple tool for making locally-trusted development certificates. It requires no configuration."
