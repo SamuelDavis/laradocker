@@ -13,6 +13,7 @@ RUN docker-php-ext-enable xdebug
 
 FROM app as dependencies
 
+RUN apk add --update git
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ENTRYPOINT ["composer"]

@@ -66,7 +66,8 @@ services:
       target: dependencies
     volumes:
       - "./.composer:/.composer:rw"
-      - "./src:/mnt"
+      - "./src:/mnt:rw"
+      - "~/.ssh:/home/user/.ssh:ro"
     working_dir: "/mnt"
   npm:
     image: node:current-alpine
