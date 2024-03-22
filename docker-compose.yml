@@ -24,8 +24,8 @@ services:
       dockerfile: php/Dockerfile
       target: debug
     volumes:
-      - "./src:/var/www/html:rw"
-      - "./xdebug:/tmp/xdebug:rw"
+      - "./src:/var/www/html"
+      - "./xdebug:/tmp/xdebug"
       - "./php/opcache.ini:/usr/local/etc/php/conf.d/opcache.ini"
       - "./php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini"
     working_dir: "/var/www/html"
@@ -59,26 +59,37 @@ services:
     ports:
       - 8081:80
   composer:
-    <<: *app
     build:
       context: .
       dockerfile: php/Dockerfile
       target: dependencies
     volumes:
-      - "./.composer:/.composer:rw"
-      - "./src:/mnt:rw"
+      - "./.composer:/.composer"
       - "~/.ssh:/home/user/.ssh:ro"
+      - "./src:/mnt"
     working_dir: "/mnt"
   npm:
     image: node:current-alpine
     volumes:
-      - "./.npm/:/root/.npm:rw"
+      - "./.npm/:/root/.npm"
       - "./src:/mnt"
     working_dir: "/mnt"
     entrypoint: ["npm"]
   artisan:
     <<: *app
     entrypoint: ["php", "./artisan"]
+  tools:
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+      target: tools
+    volumes:
+      - "./.npm/:/root/.npm"
+      - "./.composer:/.composer"
+      - "~/.ssh:/home/user/.ssh:ro"
+      - "./src:/mnt"
+    working_dir: "/mnt"
+
 
 volumes:
   database:

@@ -17,3 +17,8 @@ RUN apk add --update git
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 ENTRYPOINT ["composer"]
+
+FROM dependencies as tools
+COPY --from=node /usr/local/bin/npm /usr/local/bin/npm
+
+ENTRYPOINT ["/bin/sh", "-c"]
